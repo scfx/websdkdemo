@@ -20,6 +20,7 @@ import { SensorPhoneModule } from '@c8y/ngx-components/sensor-phone';
 import { BinaryFileDownloadModule } from '@c8y/ngx-components/binary-file-download';
 import { SearchModule } from '@c8y/ngx-components/search';
 import { AssetsNavigatorModule } from '@c8y/ngx-components/assets-navigator';
+import { CustomNavigatorModule } from './src/navigator/custom-navigator.module';
 
 @NgModule({
   imports: [
@@ -39,7 +40,9 @@ import { AssetsNavigatorModule } from '@c8y/ngx-components/assets-navigator';
     BinaryFileDownloadModule,
     SearchModule,
     SubAssetsModule,
-    ChildDevicesModule
+    ChildDevicesModule,
+    //Custom Modules
+    CustomNavigatorModule
   ]
 })
 export class AppModule extends HybridAppModule {
