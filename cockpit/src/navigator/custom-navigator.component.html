@@ -1,2 +1,16 @@
 <c8y-title>Moin moin</c8y-title>
 Hello World.
+
+<div class="row m-b-16">
+    <div class="col-xs-6">
+        <c8y-li *c8yFor="
+          let device of devices;
+          loadMore: 'auto';
+          pipe: filterPipe;
+          notFound: notFoundTemplate
+        " class="p-l-8 p-r-8 c8y-list__item--link interact">
+            <c8y-li-icon icon="rocket"></c8y-li-icon>
+            <c8y-highlight [text]="device.name"></c8y-highlight>
+        </c8y-li>
+    </div>
+</div>
