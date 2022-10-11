@@ -1,0 +1,203 @@
+<c8y-ui-title-set title="vm.module.name"> </c8y-ui-title-set>
+
+<c8y-breadcrumbs-set>
+  <c8y-breadcrumbs-item
+    path="#eventprocessing"
+    label="{{ 'Event processing' | translate }}"
+    icon="c8y-event-processing"
+  ></c8y-breadcrumbs-item>
+</c8y-breadcrumbs-set>
+
+<form name="vm.moduleForm" novalidate>
+  <div class="card content-fullpage d-col d-flex">
+    <div class="card-block bg-gray-white p-t-24 p-b-24 large-padding flex-no-shrink">
+      <div class="content-flex-70">
+        <div class="text-center">
+          <i class="c8y-icon c8y-icon-event-processing c8y-icon-duocolor icon-48"></i>
+        </div>
+        <div class="flex-grow col-10">
+          <div class="content-flex-80">
+            <div class="col-9">
+              <div class="form-group form-group-lg m-b-0">
+                <label class="sr-only">{{ 'Rule name' | translate }}</label>
+                <label class="editable" 
+                  ng-class="{ updated: vm.loadedName !== vm.module.name }"
+                >
+                  <input
+                    class="form-control"
+                    ng-model="vm.module.name"
+                    ng-disabled="!vm.permissions.canAdmin"
+                    required
+                    type="text"
+                    style="max-width: calc( {{ vm.module.name.length || 10 }}ch + 14px );"
+                    placeholder="{{ 'e.g. myModule01' | translate }}"
+                  />
+                </label>
+              </div>
+              <div class="d-flex a-i-center p-t-8">
+                <label translate class="m-r-4 m-b-0">Status</label>
+                <button
+                  type="button"
+                  class="btn btn-default m-b-0"
+                  ng-model="vm.moduleDeployed"
+                  ng-disabled="!vm.permissions.canAdmin || vm.isSmartRuleModule(vm.module)"
+                  ng-change="vm.onModuleDeployedChanged(vm.moduleDeployed)"
+                  uib-btn-checkbox
+                  style="min-width: 148px;"
+                >
+                  <span title="{{ 'Deployed' | translate }}" ng-if="vm.moduleDeployed">
+                    <i c8y-icon="check-circle" class="text-success"></i>
+                    <translate>Deployed</translate>
+                  </span>
+                  <span title="{{ 'Not deployed' | translate }}" ng-if="!vm.moduleDeployed">
+                    <i c8y-icon="ban" class="text-warning"></i>
+                    <translate>Not deployed</translate>
+                  </span>
+                </button>
+              </div>
+            </div>
+            <div class="flex-grow">
+              <p class="m-b-8">
+                <i c8y-icon="info-circle-o" class="text-info m-r-8"></i>
+                <span class="text-label-small">
+                  {{ 'Rule info' | translate }}
+                </span>
+              </p>
+              <ul class="list-unstyled small">
+                <li class="p-t-4 p-b-4 flex-row separator-top-bottom text-nowrap">
+                  <label class="small m-b-0 m-r-8">{{ 'Last modified' | translate }}</label>
+                  <span class="flex-item-right"> {{ vm.module.lastModified | absoluteDate }}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex-grow separator-top">
+      <div class="d-grid grid__col--6-6--md fit-h">
+        <div ng-class="vm.panelClasses.left" class="d-flex d-col">
+          <div class="card-header separator p-relative">
+            <div class="card-actions">
+              <button
+                title="{{ 'Examples' | translate }}…"
+                type="button"
+                class="btn btn-link"
+                ng-click="vm.browseExamples()"
+                ng-disabled="!vm.permissions.canAdmin || vm.isSmartRuleModule(vm.module)"
+              >
+                <i c8y-icon="code"></i>
+                {{ 'Examples' | translate }}…
+              </button>
+              <button
+                type="button"
+                class="btn btn-link hidden-xs hidden-sm"
+                ng-click="vm.expand('left')"
+                ng-if="!vm.isExpanded('left')"
+                title="{{ 'Expand' | translate }}"
+              >
+                <i c8y-icon="expand" class="text-muted"></i>
+              </button>
+              <button
+                type="button"
+                class="btn btn-link hidden-xs hidden-sm"
+                ng-click="vm.collapse()"
+                ng-if="vm.isExpanded('left')"
+                title="{{ 'Collapse' | translate }}"
+              >
+                <i c8y-icon="compress" class="text-muted"></i>
+              </button>
+            </div>
+            <h4 class="card-title">
+              {{ 'Source code' | translate }}
+            </h4>
+          </div>
+          <div
+            name="aceEditor"
+            ui-ace="vm.aceEditorOptions"
+            ng-model="vm.module.body"
+            ng-style="vm.aceEditorStyles"
+            class="form-control"
+            ng-readonly="!vm.permissions.canAdmin || vm.isSmartRuleModule(vm.module)"
+            required
+          ></div>
+        </div>
+
+        <div ng-class="vm.panelClasses.right" class="d-flex d-col" ng-if="vm.module.id">
+          <div class="card-header separator p-relative">
+            <h4 class="card-title">{{ 'Debugging and monitoring' | translate }}</h4>
+            <div class="card-actions">
+              <button
+                type="button"
+                class="btn btn-link hidden-xs hidden-sm"
+                ng-click="vm.expand('right')"
+                ng-if="!vm.isExpanded('right')"
+                title="{{ 'Expand' | translate }}"
+              >
+                <i c8y-icon="expand" class="text-muted"></i>
+              </button>
+              <button
+                type="button"
+                class="btn btn-link hidden-xs hidden-sm"
+                title="{{ 'Collapse' | translate }}"
+                ng-click="vm.collapse()"
+                ng-if="vm.isExpanded('right')"
+              >
+                <i c8y-icon="compress" class="text-muted"></i>
+              </button>
+            </div>
+          </div>
+
+          <uib-tabset justified="true" class="card-tabs-wrapper">
+            <uib-tab classes="one two three">
+              <uib-tab-heading>
+                <i c8y-icon="bell"></i>
+                <span translate>Alarms</span>
+              </uib-tab-heading>
+              <div class="card-block">
+                <c8y-event-processing-rule-alarms
+                  rule="vm.module"
+                ></c8y-event-processing-rule-alarms>
+              </div>
+            </uib-tab>
+            <uib-tab>
+              <uib-tab-heading>
+                <i c8y-icon="rss"></i>
+                <span translate>Notifications</span>
+              </uib-tab-heading>
+              <c8y-event-processing-rule-notifications rule="vm.module" class="d-contents">
+              </c8y-event-processing-rule-notifications>
+            </uib-tab>
+            <uib-tab>
+              <uib-tab-heading>
+                <i c8y-icon="line-chart"></i>
+                <span translate>Metrics</span>
+              </uib-tab-heading>
+              <c8y-event-processing-rule-metrics rule="vm.module">
+              </c8y-event-processing-rule-metrics>
+            </uib-tab>
+          </uib-tabset>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-footer separator col-fullspan">
+      <button class="btn-default btn" 
+        title="{{ 'Cancel' | translate }}"
+        ng-click="vm.cancel()"
+      >
+        {{ 'Cancel' | translate }}
+      </button>
+      <button
+        title="{{ 'Save' | translate }}"
+        type="submit"
+        class="btn btn-primary"
+        ng-click="vm.save(vm.module, vm.moduleForm)"
+        ng-disabled="!vm.permissions.canAdmin || vm.isSmartRuleModule(vm.module) || vm.moduleForm.$invalid || vm.moduleForm.$pristine"
+      >
+        {{ 'Save' | translate }}
+      </button>
+    </div>
+  </div>
+</form>

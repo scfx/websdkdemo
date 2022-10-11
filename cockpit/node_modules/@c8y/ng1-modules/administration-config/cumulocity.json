@@ -1,0 +1,13 @@
+{
+  "name": "Administration config",
+  "ngModules": [
+    "c8y.administrationConfig"
+  ],
+  "icon": "c8y-shield",
+  "color": "#F2DF0F",
+  "category": "Administration",
+  "description": "Administration config",
+  "js": [
+    "administration-config.module.js"
+  ]
+}

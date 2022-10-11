@@ -1,0 +1,80 @@
+<div class="viewport-modal">
+  <div class="modal-header">
+    <h3 translate>Event processing rules examples</h3>
+  </div>
+  <div class="p-l-16 p-r-16">
+  <form class="row d-flex">
+    <div class="col-sm-6 d-flex d-col">
+      <div class="p-l-8 p-r-8 p-b-16">
+        <div class="input-group input-group-search">
+          <input
+            type="search"
+            class="form-control"
+            placeholder="{{'Search in examples' | translate}}…"
+            ng-model="vm.filterText"
+          >
+          <span class="input-group-addon">
+            <i c8y-icon="search" ng-show="vm.filterText.length === 0 || !vm.filterText "></i>
+            <i c8y-icon="times" class="text-muted" ng-show="vm.filterText.length > 0" ng-click="vm.filterText = ''"></i>
+          </span>
+        </div>
+      </div>
+      <div class="modal-inner-scroll">
+        <div class="p-l-8 p-t-0">
+          <div class="list-group">
+            <div
+              ng-repeat="example in vm.examples | filter:vm.filter(vm.filterText)"
+              class="list-group-item interact"
+              ng-class="{'active': vm.isSelected(example)}"
+              ng-click="vm.select(example)"
+            >
+              <div class="d-flex">
+                <span class="list-group-icon m-r-4">
+                  <i c8y-icon="terminal"></i>
+                </span>
+                <span title="{{ example.name | translate }}" >
+                  {{example.name | translate}}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 d-flex d-col">
+      <div class="d-contents">
+        <div class="legend m-t-8 m-b-16 p-b-8 form-block" translate>Preview</div>
+        <div
+          class="fit-h"
+          style="min-height:240px"
+          ui-ace="vm.previewEditorOptions"
+          ng-model="vm.selection.example.value"
+          readonly
+        >
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+  <div class="modal-footer">
+    <button
+      title="{{ 'Cancel' | translate }}" 
+      type="button"
+      class="btn btn-default"
+      ng-click="vm.cancel()"
+      translate
+      >
+      Cancel
+    </button>
+    <button
+      title="{{ 'Append' | translate }}" 
+      type="button"
+      class="btn btn-primary"
+      ng-click="vm.append()"
+      ng-disabled="!vm.selection.example"
+      translate
+    >
+      Append
+    </button>
+  </div>
+</div>

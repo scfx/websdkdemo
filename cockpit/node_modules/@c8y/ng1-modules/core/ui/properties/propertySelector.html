@@ -1,0 +1,108 @@
+<div class="form-group m-b-8">
+  <label>{{ 'Properties' | translate }}</label>
+  <div class="d-flex">
+    <div class="m-l-auto m-r-16">
+      <a class="btn btn-default btn-xs" data-ng-click="addProperty()">
+        <i c8y-icon="plus"></i>
+        {{ 'Add property' | translate }}
+      </a>
+    </div>
+    <div class="dropdown" ng-hide="hideActions" uib-dropdown>
+      <button class="btn btn-default btn-xs dropdown-toggle c8y-dropdown" uib-dropdown-toggle>
+        <i c8y-icon="plus"></i>
+        {{ 'Add action' | translate }}
+      </button>
+      <ul class="dropdown-menu dropdown-menu-right m-t-8" uib-dropdown-menu>
+        <li ng-repeat="action in actions">
+          <a href="" ng-click="addAction(action)">
+          {{ action.config.label | translate }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<table class="table table-vertical-middle form-group">
+  <thead>
+    <th style="width:5%;"></th>
+    <th style="width:5%;">
+      <label>{{ 'Show' | translate }}</label>
+    </th>
+    <th style="width:28%;">
+      <label>{{ 'Label' | translate }}</label>
+    </th>
+    <th style="width:28%;">
+      <label>{{ 'Property' | translate }}</label>
+    </th>
+    <th style="width:28%;" ng-if="showRenderType()">
+      <label>{{ 'Render type' | translate }}</label>
+    </th>
+    <th style="width:5%;"></th>
+  </thead>
+
+  <tbody ui-sortable="{handle: '.handle', stop: onPropertiesOrderChanged}" ng-model="properties">
+    <tr class="property" ng-repeat="property in properties">
+      <td style="width:5%" class="handle">
+        <i c8y-icon="bars" style="cursor: move;"></i>
+      </td>
+      <td style="width:5%">
+        <input type="checkbox" ng-change="updateOptions()" ng-model="property.__active" />
+      </td>
+      <td style="width:28%">
+        <input class="form-control property-label" data-ng-model="property.label" />
+      </td>
+      <td style="width:28%">
+        <a
+          class="btn btn-xs btn-default"
+          ng-show="!!property.configSchema"
+          href=""
+          ng-click="configComputeProperty(property)"
+          uib-tooltip="{{ 'Configure computed property' | translate }}"
+        >
+          <i c8y-icon="bolt"></i>
+          {{ displayKeyPath(property.keyPath) }}
+        </a>
+        <span ng-hide="!!property.configSchema">{{ displayKeyPath(property.keyPath) }}</span>
+      </td>
+      <td style="width:28%" ng-if="showRenderType()">
+        <div class="input-group flex-row">
+          <div class="c8y-select-wrapper">
+            <select
+              class="form-control"
+              name="renderType"
+              ng-disabled="property.isAction"
+              ng-model="property.renderType"
+              ng-options="render.name as render.humanName | translate for render in renderTypes"
+            >
+              <span></span>
+            </select>
+          </div>
+          <span class="m-l-4">
+            <button
+              type="button"
+              class="btn btn-xs pull-right"
+              title="{{ 'Config renderer' | translate }}"
+              ng-click="configRenderer(property)"
+              ng-show="rendererHasConfig(property.renderType)"
+              ng-class="{'btn-danger':!property.renderConfig, 'btn-default': property.renderConfig}"
+            >
+              <i c8y-icon="sliders"></i>
+            </button>
+          </span>
+        </div>
+      </td>
+      <td style="width:5%">
+        <button
+          type="button"
+          class="btn btn-danger btn-xs showOnHover pull-right"
+          title="{{ 'Delete property' | translate }}"
+          ng-click="removeProperty(property)"
+        >
+          <i c8y-icon="times"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<ng-form name="propertiesHiddenForm"></ng-form>

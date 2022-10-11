@@ -1,0 +1,1 @@
+"use strict";!function(){function t(t,i,e){var n=e("Connectivity");t.when("/connectivitySettings/sigfox_provider_settings",{template:"<c8y-sigfox-connectivity-settings />"}),i.addTitle("connectivitySettings",{data:function(){return{title:n}}})}t.$inject=["$routeProvider","c8yTitleProvider","gettext"],angular.module("c8y.sigfoxConnectivitySettings",[]).config(t)}();

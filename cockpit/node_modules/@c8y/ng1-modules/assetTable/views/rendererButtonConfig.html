@@ -1,0 +1,112 @@
+<form name="addOperationForm" novalidate>
+  <div class="modal-header separator">
+    <h3 translate>Button configuration</h3>
+  </div>
+  <div class="modal-inner-scroll">
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label class="form-label" translate>
+              Button label
+            </label>
+            <input class="form-control" type="text" ng-model="config.label" />
+          </div>
+        </div>
+        <div class="col-md-8" ng-show="config.actionType === 'createOperation'">
+          <div class="form-group">
+            <label class="form-label" translate>
+              Operation
+            </label>
+            <div class="input-group">
+              <ui-select class="form-control" ng-model="data.operationSelected">
+                <ui-select-match placeholder="{{ 'Select or search operation' | translate }}">
+                  <div>
+                    <span class="list-group-item-heading">
+                      {{ $select.selected.name }}
+                      <small ng-show="$select.selected.category" class="text-muted">
+                        {{ $select.selected.category }}
+                      </small>
+                    </span>
+                    <span class="list-group-item-text">
+                      <small class="text-muted">
+                        {{ $select.selected.text | translate }}
+                      </small>
+                    </span>
+                  </div>
+                </ui-select-match>
+                <ui-select-choices repeat="operation in commandTemplates | filter: $select.search">
+                  <div>
+                    <span class="list-group-item-heading">
+                      {{ operation.name }}
+                      <small ng-show="operation.category" class="text-muted">
+                        {{ operation.category }}
+                      </small>
+                    </span>
+                    <span class="list-group-item-text">
+                      <small class="text-muted">
+                        {{ operation.text | translate }}
+                      </small>
+                    </span>
+                  </div>
+                </ui-select-choices>
+              </ui-select>
+              <span class="input-group-btn">
+                <button
+                  title="{{ 'Use this operation' | translate }}"
+                  class="btn btn-primary"
+                  type="button"
+                  ng-click="chooseOperation(data.operationSelected)"
+                >
+                  <i c8y-icon="share"></i>
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div ng-show="config.actionType === 'createOperation'">
+        <div
+          class="form-group"
+          ng-class="{'has-error': addOperationForm.$dirty && addOperationForm.$invalid}"
+        >
+          <label class="form-label" translate>
+            Command editor
+          </label>
+          <textarea
+            c8y-code-editor="json"
+            class="form-control bg-gray-white"
+            name="operation"
+            ng-model="config.args[0]"
+            rows="6"
+            ng-required="config.actionType === 'createOperation'"
+          >
+          </textarea>
+          <span ng-if="addOperationForm.$dirty && addOperationForm.$invalid">
+            <i c8y-icon="exclamation-circle" class="text-danger"></i>
+            <span class="small" translate>
+              This operation is invalid.
+            </span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      title="{{ 'Cancel' | translate }}"
+      class="btn btn-default"
+      ng-click="dismiss()"
+    >
+      {{ 'Cancel' | translate }}
+    </button>
+    <button
+      title="{{ 'Save' | translate }}"
+      class="btn btn-primary"
+      data-ng-disabled="addOperationForm.$invalid"
+      ng-click="close()"
+    >
+      {{ 'Save' | translate }}
+    </button>
+  </div>
+</form>

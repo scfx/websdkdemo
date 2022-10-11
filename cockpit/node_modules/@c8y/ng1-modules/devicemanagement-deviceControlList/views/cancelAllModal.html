@@ -1,0 +1,22 @@
+<div class="c8y-prompt alert alert-warning">
+  <h3 class="m-b-16" data-ng-show="title" ng-bind="title | translate"></h3>
+  <p class="text-break-word" ng-bind="body | translate"></p>
+  <div class="alert-footer">
+    <button
+      title="{{ 'Cancel all pending operations' | translate }}"
+      class="btn btn-danger"
+      ng-click="close(1)"
+      translate
+    >
+      Cancel all pending operations
+    </button>
+    <button
+      title="{{ 'Cancel' | translate }}"
+      class="btn btn-default"
+      ng-click="dismiss()"
+      translate
+    >
+      Cancel
+    </button>
+  </div>
+</div>

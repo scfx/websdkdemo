@@ -1,0 +1,57 @@
+<div class="sticky-top card-block bg-component" ng-if="vm.msgs.length > 0">
+  <div class="input-group">
+    <span class="input-group-addon">
+      <i c8y-icon="filter"></i>
+    </span>
+    <input
+      type="search"
+      class="form-control"
+      placeholder="{{'Filter notifications' | translate}}…"
+      ng-model="vm.notificationsFilter.text"
+    />
+    <span class="input-group-addon">
+      <span class="label m-r-16" ng-class="vm.statusClass(vm.status)">
+        {{vm.statusText(vm.status) | translate}}
+      </span>
+    </span>
+    <span class="input-group-btn">
+      <button type="button" class="btn btn-default" ng-click="vm.clearAll()">
+        <i c8y-icon="times"></i>
+      </button>
+    </span>
+  </div>
+</div>
+  <div class="card-block" ng-if="vm.msgs.length === 0">
+    <div class="card c8y-empty-state text-left">
+      <h1 c8y-icon="rss"></h1>
+      <p><strong translate>No notifications received yet.</strong></p>
+    </div>
+  </div>
+
+  <div class="card-block p-t-0" ng-if="vm.msgs.length > 0">
+    <table class="table">
+      <tr ng-repeat-start="msg in vm.msgs | filter:vm.notificationsFilter.text | orderBy:'id':true track by $index">
+        <td ng-class="{'alert, alert-danger': vm.isError(msg)}">
+          <span class="interact" ng-click="vm.toggle(msg)">
+            <b>
+              <span ng-if="vm.isError(msg)" translate>ERROR</span>
+              {{'Statement' | translate}}:
+            </b>
+            {{vm.getStatementName(msg)}}
+          </span>
+          <small class="text-muted">
+            {{'ID' | translate}}: {{msg.id}}
+          </small>
+        </td>
+      </tr>
+      <tr ng-repeat-end ng-if="vm.isOpen(msg)">
+        <td>
+          <h5>
+            <i c8y-icon="bars"></i> <translate>Details</translate>
+          </h5>
+          <pre><code ng-bind-html="msg.data | json"></code></pre>
+        </td>
+      </tr>
+    </table>
+  </div>
+
