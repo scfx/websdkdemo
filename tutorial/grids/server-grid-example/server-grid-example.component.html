@@ -1,0 +1,47 @@
+<c8y-title>Data grid examples</c8y-title>
+
+<div class="card">
+  <div class="card-header separator">
+    <h4 class="card-title">Data grid with server-side filtering/sorting</h4>
+  </div>
+  <div class="card-block">
+    <p>The following example features <code>DataGridComponent</code> and:</p>
+    <ul>
+      <li>setting custom titles and labels</li>
+      <li>defining columns with inline objects</li>
+      <li>defining a custom column with a class</li>
+      <li>using custom components for header cell, data cell and filtering form</li>
+      <li>building inventory query and loading data with <code>serverSideDataCallback</code></li>
+      <li>event handlers for: items selection, individual actions, bulk actions, config changes</li>
+      <li>setting up a view for empty list</li>
+    </ul>
+
+    <c8y-data-grid
+      [title]="title"
+      [loadMoreItemsLabel]="loadMoreItemsLabel"
+      [loadingItemsLabel]="loadingItemsLabel"
+      [displayOptions]="displayOptions"
+      [columns]="columns"
+      [pagination]="pagination"
+      [infiniteScroll]="infiniteScroll"
+      [serverSideDataCallback]="serverSideDataCallback"
+      [refresh]="refresh"
+      (rowClick)="onRowClick($event)"
+      [actionControls]="actionControls"
+      [selectable]="selectable"
+      (itemsSelect)="onItemsSelect($event)"
+      [bulkActionControls]="bulkActionControls"
+      (onConfigChange)="onConfigChange($event)"
+    >
+      <div class="c8y-empty-state">
+        <h1 c8yIcon="search"></h1>
+        <div>
+          <p>
+            <strong>{{ 'No matching managed objects.' | translate }}</strong>
+          </p>
+          <small>{{ 'Refine your search terms' | translate }}</small>
+        </div>
+      </div>
+    </c8y-data-grid>
+  </div>
+</div>

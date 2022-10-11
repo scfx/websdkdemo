@@ -1,0 +1,19 @@
+<c8y-title>Named-context dashboard</c8y-title>
+
+<div class="card">
+  <div class="card-block">
+    <p class="lead">
+      A dashboard which is saved to the database. Note, there are different types of dashboards (e.g. named,
+      group, device, device-type, etc.). This one is a combination of the named and device dashboards.
+      By adding the context here as well, the named dashboard is assigned to the device as a childAddition.
+      This allows using this dashboard also with inventory roles.
+    </p>
+  </div>
+</div>
+
+<c8y-context-dashboard
+  [name]="name"
+  [defaultWidgets]="defaultWidgets"
+  [context]="context"
+  [canDelete]="false"
+></c8y-context-dashboard>

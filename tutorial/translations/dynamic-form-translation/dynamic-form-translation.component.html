@@ -1,0 +1,21 @@
+<c8y-title>Dynamic form translation</c8y-title>
+<form class="card" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="card-header">
+    <h4 class="card-title">Dynamic form translation example</h4>
+  </div>
+  <div class="card-block">
+    Internationalization (i18n) is built-in in the <code>DynamicFormsModule</code>. Thus, no further
+    configuration except marking the strings for the translation is needed.
+  </div>
+  <div class="card-block">
+    <formly-form [form]="form" [fields]="fields"></formly-form>
+  </div>
+  <div class="card-footer">
+    <button type="reset" class="btn btn-default" title="Reset">
+      Reset
+    </button>
+    <button type="submit" class="btn btn-primary" title="Submit">
+      Submit
+    </button>
+  </div>
+</form>

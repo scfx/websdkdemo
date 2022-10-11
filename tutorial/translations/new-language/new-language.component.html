@@ -1,0 +1,45 @@
+<c8y-title>How to add a new language</c8y-title>
+<div class="card">
+  <div class="card-header separator">
+    <h4 class="card-title" title="Add a new language">Add a new language</h4>
+  </div>
+  <div class="card-block">
+    <ul>
+      <li>
+        Create a new <code>.po</code> file with the <code>Poedit</code> program or manually. If you
+        choose the second option, add the following metadata to it.
+        <pre class="m-t-16 m-b-16">
+
+          "Project-Id-Version: c8yui.core\n"
+          "Report-Msgid-Bugs-To: \n"
+          "POT-Creation-Date: \n"
+          "PO-Revision-Date: \n"
+          "Last-Translator: \n"
+          "Language: it\n"
+          "Language-Team: \n"
+          "Content-Type: text/plain; charset=UTF-8\n"
+          "Content-Transfer-Encoding: 8bit\n"
+          "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+        </pre>
+      </li>
+      <li>
+        Add translations to this file:
+        <pre class="m-t-16 m-b-16">
+
+          msgid "Devices"
+          msgstr "Dispositivi"
+        </pre>
+      </li>
+      <li>
+        In the <code>index.ts</code> file, add the following line:
+        <code>import "./locales/it.po";</code>
+      </li>
+      <li>
+        In the <code>package.json</code> file, under the <code>c8y</code> keys add:
+        <code>
+          {{ lang | json }}
+        </code>
+      </li>
+    </ul>
+  </div>
+</div>

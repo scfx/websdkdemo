@@ -1,0 +1,92 @@
+<c8y-title>Translations</c8y-title>
+
+<div class="card">
+  <div class="card-header separator">
+    <h4 class="card-title">How to add new translations to an existing language</h4>
+  </div>
+  <div class="card-block">
+    <ul>
+      <li>
+        Find the file that includes <code>.po</code> extension, you can find it in the
+        <code>./locales</code> folder or in the <code>node_modules/@c8y/locales</code>. Select the
+        language you want to update i.e. <code>pt_BR.po</code>
+      </li>
+      <li>
+        If desired language is already present under the <code>./locales</code> folder procceed to
+        the next step. If the <code>.po</code> file with the slected language is placed in the
+        <code>node_modules</code> copy it to the <code>./locales</code> folder. You can also use
+        this boilerplate to create <code>.po</code> file from scratch:
+        <pre class="m-t-16 m-b-16">
+
+          "Project-Id-Version: c8yui.core\n"
+          "Report-Msgid-Bugs-To: \n"
+          "POT-Creation-Date: \n"
+          "PO-Revision-Date: \n"
+          "Last-Translator: \n"
+          "Language: pt_BR\n"
+          "Language-Team: \n"
+          "Content-Type: text/plain; charset=UTF-8\n"
+          "Content-Transfer-Encoding: 8bit\n"
+          "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+          msgid ""
+          msgstr ""
+        </pre>
+        or create it with program like: <code>Poedit</code>.
+      </li>
+      <li>
+        Fill in the <code>msgid</code> field as follows:
+        <code>msgid "Awesome Tab"</code>
+      </li>
+      <li>
+        Fill in the <code>msgstr</code> field with your translation:
+        <code>msgstr "Separador Incrível"</code>
+      </li>
+      <li>
+        In the <code>index.ts</code> file, add the following line:
+        <code>import "./locales/pt_BR.po";</code>
+      </li>
+      <li>
+        Save your changes and restart your dev server. New translated string should be available.
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header separator">
+    <h4 class="card-title">How to edit existing translations</h4>
+  </div>
+  <div class="card-block">
+    <ul>
+      <li>
+        The main difference between adding and editing an existing translation is to find the
+        existing translation and only modify the <code>msgstr</code> field in your new or copied
+        <code>.po</code> file. You can find all translated strings in the
+        <code>node_modules/@c8y/locales</code> or use <code>c8ycli locale-extract</code> command
+        described below.
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header separator">
+    <h4 class="card-title">
+      How to add new translations to an existing language with the c8ycli locale-extract
+    </h4>
+  </div>
+  <div class="card-block">
+    <ul>
+      <li>
+        <code>c8ycli locale-extract</code> is the command that automatically copies all translations
+        from the <code>node_modules/@c8y/locales</code>. This makes it easier to edit and add new
+        translations.
+      </li>
+      <li>
+        After using this command, the folder <code>./locales</code> will contain all available
+        translations. The rest of the process is the same as above.
+      </li>
+    </ul>
+  </div>
+</div>

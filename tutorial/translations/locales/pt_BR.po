@@ -1,0 +1,33 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.8.9\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: pt_BR\n"
+
+msgid "Awesome Tab"
+msgstr "Separador Incrível"
+
+msgid "Hello"
+msgstr "Olá"
+
+msgid "Mighty warrior with strength, stamina and agility"
+msgstr "Guerreiro destemido com força, resistência e agilidade"
+
+msgid "Remove Device"
+msgstr "Remover dispositivo"
+
+msgid "Device"
+msgstr "Dispositivo"
+
+msgid "{{ filteredItemsCount }} of {{ allItemsCount }} items."
+msgstr "{{ filteredItemsCount }} de {{ allItemsCount }} itens."
+
+msgid "Simple text input"
+msgstr "Entrada de texto simples"

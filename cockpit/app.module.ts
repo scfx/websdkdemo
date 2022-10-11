@@ -21,6 +21,7 @@ import { BinaryFileDownloadModule } from '@c8y/ngx-components/binary-file-downlo
 import { SearchModule } from '@c8y/ngx-components/search';
 import { AssetsNavigatorModule } from '@c8y/ngx-components/assets-navigator';
 import { CustomNavigatorModule } from './src/navigator/custom-navigator.module';
+import { KPITrendWidgetAppModule } from './src/widgets/kpi-widget/kpitrend-widget.module';
 
 @NgModule({
   imports: [
@@ -42,7 +43,8 @@ import { CustomNavigatorModule } from './src/navigator/custom-navigator.module';
     SubAssetsModule,
     ChildDevicesModule,
     //Custom Modules
-    CustomNavigatorModule
+    CustomNavigatorModule,
+    KPITrendWidgetAppModule
   ]
 })
 export class AppModule extends HybridAppModule {

@@ -1,0 +1,29 @@
+<c8y-title>{{ pageTitle }}</c8y-title>
+<div class="row">
+  <div class="col-xs-12 col-sm-10 col-md-8 col-lg-6">
+    <form class="card" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="card-header">
+        <h4 class="card-title">Introduction</h4>
+      </div>
+      <div class="card-block">
+        <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+      </div>
+      <div class="card-footer">
+        <button type="reset" class="btn btn-default" title="Reset">
+          Reset
+        </button>
+        <button type="submit" class="btn btn-primary" title="Submit">
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="col-xs-12 col-sm-10 col-md-8 col-lg-6">
+    <div class="card">
+      <div class="card-block">
+        <div class="legend form-block">Model</div>
+        <pre style="min-height: 98px;"><code>{{ model | json }}</code></pre>
+      </div>
+    </div>
+  </div>
+</div>

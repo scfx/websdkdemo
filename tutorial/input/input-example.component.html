@@ -1,0 +1,16 @@
+<c8y-title> Input examples </c8y-title>
+
+<h4>Default range slider:</h4>
+<c8y-range>
+  <input type="range" min="0" max="100" steps="1" />
+</c8y-range>
+
+<h4>Range with custom popover:</h4>
+<c8y-range #range>
+  <ng-template #c8yRangeValue>
+    <div>
+      <span>The <strong>Value</strong> is: {{ range.value }}</span>
+    </div>
+  </ng-template>
+  <input type="range" min="20" max="60" steps="2" />
+</c8y-range>

@@ -1,0 +1,20 @@
+<c8y-title>Date translation examples</c8y-title>
+<div class="card">
+  <div class="card-header separator">
+    <h4 class="card-title">Angular pipe example</h4>
+  </div>
+  <div class="card-block">This date will be translated: {{ currentDate | date: 'medium' }}.</div>
+</div>
+
+<div class="card">
+  <div class="card-header separator">
+    <h4 class="card-title">Cumulocity pipe example</h4>
+  </div>
+  <div class="card-block">
+    <div>This date will be translated: {{ currentDate | c8yDate }}.</div>
+    <div>
+      This date exceeding the range supported by ECMAScript will be translated:
+      {{ 8640000000000000 + 1 | c8yDate }}.
+    </div>
+  </div>
+</div>

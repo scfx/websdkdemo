@@ -1,0 +1,25 @@
+<label class="c8y-checkbox" [class.has-error]="showError">
+  <input
+    type="checkbox"
+    [class.is-invalid]="showError"
+    [class.form-check-input]="to.formCheck.indexOf('custom') === -1"
+    [class.position-static]="to.formCheck === 'nolabel'"
+    [class.custom-control-input]="to.formCheck.indexOf('custom') === 0"
+    [indeterminate]="to.indeterminate && formControl.value == null"
+    [formControl]="formControl"
+    [formlyAttributes]="field"
+  /><span></span><span class="text-uppercase"> {{ to.label }} </span>
+  <span *ngIf="to.required && to.hideRequiredMarker !== true"
+    ><em class="m-l-4">(required)</em></span
+  >
+  <button
+    *ngIf="!!to.description"
+    class="btn-clean m-l-4 flex-item-middle"
+    [popover]="to.description"
+    placement="auto"
+    outsideClick="true"
+    type="button"
+  >
+    <i c8yIcon="question-circle-o" class="text-primary"></i>
+  </button>
+</label>

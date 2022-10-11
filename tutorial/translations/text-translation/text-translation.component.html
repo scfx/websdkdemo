@@ -1,0 +1,41 @@
+<c8y-title>Text translation examples</c8y-title>
+<div class="card">
+  <div class="card-header separator">
+    <h4 class="card-title">Gettext example (mark string for translation)</h4>
+  </div>
+  <div class="card-block">This word will be translated: {{ getText | translate }}.</div>
+</div>
+
+<div class="card">
+  <div class="card-header separator">
+    <h4 class="card-title">Pipe example</h4>
+  </div>
+  <div class="card-block">This word will be translated: {{ 'Device' | translate }}.</div>
+</div>
+
+<div class="card">
+  <div class="card-header separator">
+    <h4 class="card-title">Atribute example</h4>
+  </div>
+  <div class="card-block">This word will be translated: <span translate>Device</span>.</div>
+</div>
+
+<div class="card">
+  <div class="card-header separator">
+    <h4 class="card-title">translateService.instant example</h4>
+  </div>
+  <div class="card-block">This word will be translated: {{ translateInstant }}.</div>
+  <div class="card-block">This sentence will be translated too: {{ deleteDeviceProfile() }}</div>
+</div>
+
+<div class="card">
+  <div class="card-header separator">
+    <h4 class="card-title">ngNonBindable example</h4>
+  </div>
+  <div class="card-block">
+    This sentence will be translated:
+    <span class="m-r-4" ngNonBindable translate [translateParams]="ngNonBindableTranslate"
+      >{{ filteredItemsCount }} of {{ allItemsCount }} items.</span
+    >
+  </div>
+</div>
